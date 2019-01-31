@@ -1,0 +1,15 @@
+{{ define "Show" }}
+  {{ template "Header" }}
+    <div class="container">
+        <h2> Tool</h2>
+        <p><strong>Name:</strong> {{ .Name }} </p>
+        <p><strong>Category:</strong> {{ .Category }} </p>
+        <p><strong>URL:</strong>{{ .URL }}</p>
+        <p><strong>Rating:</strong> {{ .Rating }} </p>
+        <p><strong>Notes:</strong> {{ .Notes }} </p>
+        <br /> 
+        <a href="/edit?id={{ .Id }}" class="btn btn-primary">Edit</a>
+        <a href="/" class="btn btn-primary">Go back to tools</a>
+    </div>
+  {{ template "Footer" }}
+{{ end }}
