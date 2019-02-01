@@ -20,12 +20,16 @@ type Tool struct {
 	Notes    string
 }
 
+
 func dbConn() (db *sql.DB) {
 	dbDriver := "mysql"
+	dbServer := os.Getenv("DATABASE_SERVER")
 	dbUser := os.Getenv("DATABASE_USERNAME")
 	dbPass := os.Getenv("DATABASE_PASSWORD")
 	dbName := os.Getenv("DATABASE_NAME")
-	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
+	dbPort := os.Getenv("DATABASE_PORT")
+
+	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp("+dbServer+":"+dbPort+")/"+dbName)
 	if err != nil {
 		panic(err.Error())
 	}
