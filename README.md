@@ -1,4 +1,4 @@
-# ITCM
+# GOWT
 Sample crud web application project using Golang(http, templates, os, sql), Bootstrap 4, DataTables, MySQL.
 
 ## Getting Started
