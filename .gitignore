@@ -14,3 +14,10 @@
 # Set environment variables 
 set_env.sh
 set_env.bat
+
+# Environment variable files 
+.env*
+
+# Build output folder
+out/bin
+vendor
