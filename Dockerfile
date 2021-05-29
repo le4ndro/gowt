@@ -1,4 +1,6 @@
-FROM golang:1.16-alpine as builder
+FROM golang:1.16-alpine3.13 AS builder
+
+RUN apk add --no-cache git gcc musl-dev make
 
 ENV GO111MODULE=on \
     GOOS=linux \
@@ -8,14 +10,16 @@ ENV GO111MODULE=on \
 WORKDIR /build
 COPY  . /build
 
-RUN go mod download
+RUN make vendor
 
-RUN go build -a -o gowt .
+RUN make build
 
-FROM scratch as prod
+FROM alpine:3.13
+
+RUN apk add --no-cache ca-certificates
 
 WORKDIR /root/
-COPY --from=builder /build/gowt .
+COPY --from=builder /build/out/bin/gowt .
 COPY --from=builder /build/templates ./templates
 COPY --from=builder /build/.env .
 
