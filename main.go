@@ -57,7 +57,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			panic(err.Error())
 		}
-		log.Println("Listing Row: Id " + string(id) + " | name " + name + " | category " + category + " | url " + url + " | rating " + string(rating) + " | notes " + notes)
+		log.Println("Listing Row: Id " + string(rune(id)) + " | name " + name + " | category " + category + " | url " + url + " | rating " + string(rune(rating)) + " | notes " + notes)
 
 		tool.Id = id
 		tool.Name = name
@@ -90,7 +90,7 @@ func Show(w http.ResponseWriter, r *http.Request) {
 			panic(err.Error())
 		}
 
-		log.Println("Showing Row: Id " + string(id) + " | name " + name + " | category " + category + " | url " + url + " | rating " + string(rating) + " | notes " + notes)
+		log.Println("Showing Row: Id " + string(rune(id)) + " | name " + name + " | category " + category + " | url " + url + " | rating " + string(rune(rating)) + " | notes " + notes)
 
 		tool.Id = id
 		tool.Name = name
@@ -153,7 +153,7 @@ func Insert(w http.ResponseWriter, r *http.Request) {
 		log.Println("Insert Data: name " + name + " | category " + category + " | url " + url + " | rating " + rating + " | notes " + notes)
 	}
 	defer db.Close()
-	http.Redirect(w, r, "/", 301)
+	http.Redirect(w, r, "/", http.StatusMovedPermanently)
 }
 
 func Update(w http.ResponseWriter, r *http.Request) {
@@ -173,7 +173,7 @@ func Update(w http.ResponseWriter, r *http.Request) {
 		log.Println("UPDATE Data: name " + name + " | category " + category + " | url " + url + " | rating " + rating + " | notes " + notes)
 	}
 	defer db.Close()
-	http.Redirect(w, r, "/", 301)
+	http.Redirect(w, r, "/", http.StatusMovedPermanently)
 }
 
 func Delete(w http.ResponseWriter, r *http.Request) {
@@ -186,7 +186,7 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 	delForm.Exec(tool)
 	log.Println("DELETE " + tool)
 	defer db.Close()
-	http.Redirect(w, r, "/", 301)
+	http.Redirect(w, r, "/", http.StatusMovedPermanently)
 }
 
 func main() {
